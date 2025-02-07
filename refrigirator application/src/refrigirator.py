@@ -2,10 +2,10 @@ from flask import Flask, request, jsonify
 from datetime import datetime, timedelta
 import sqlite3
 from flask_cors import CORS
+app = Flask(__name__)
 CORS(app)
 
 
-app = Flask(__name__)
 
 # Database Initialization
 def init_db():
