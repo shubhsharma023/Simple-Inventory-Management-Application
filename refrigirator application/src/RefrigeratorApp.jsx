@@ -3,13 +3,13 @@ import axios from "axios";
 
 export default function RefrigeratorApp() {
   const [items, setItems] = useState([]);
+  const [expiredItems, setExpiredItems] = useState([]);
   const [name, setName] = useState("");
   const [quantity, setQuantity] = useState("");
   const [unit, setUnit] = useState("");
   const [expiration, setExpiration] = useState("");
   const [consumeName, setConsumeName] = useState("");
   const [consumeQuantity, setConsumeQuantity] = useState("");
-  const [expiredItems, setExpiredItems] = useState([]);
 
   useEffect(() => {
     fetchStatus();
@@ -54,41 +54,55 @@ export default function RefrigeratorApp() {
   };
 
   return (
-    <div className="flex flex-col items-center p-5">
-      <h1 className="text-2xl font-bold text-center">Refrigerator Management</h1>
-      
-      <div className="my-4 w-1/2">
-        <h2 className="text-lg font-semibold">Add Item</h2>
-        <input className="block w-full p-2 border rounded" type="text" placeholder="Name" onChange={(e) => setName(e.target.value)} />
-        <input className="block w-full p-2 border rounded mt-2" type="number" placeholder="Quantity" onChange={(e) => setQuantity(e.target.value)} />
-        <input className="block w-full p-2 border rounded mt-2" type="text" placeholder="Unit" onChange={(e) => setUnit(e.target.value)} />
-        <input className="block w-full p-2 border rounded mt-2" type="date" onChange={(e) => setExpiration(e.target.value)} />
-        <button className="block w-full p-2 mt-2 bg-blue-500 text-white rounded" onClick={addItem}>Add</button>
-      </div>
+    <div className="container">
+      <div className="card">
+        <h1>Refrigerator Management</h1>
 
-      <div className="my-4 w-1/2">
-        <h2 className="text-lg font-semibold">Consume Item</h2>
-        <input className="block w-full p-2 border rounded" type="text" placeholder="Name" onChange={(e) => setConsumeName(e.target.value)} />
-        <input className="block w-full p-2 border rounded mt-2" type="number" placeholder="Quantity" onChange={(e) => setConsumeQuantity(e.target.value)} />
-        <button className="block w-full p-2 mt-2 bg-red-500 text-white rounded" onClick={consumeItem}>Consume</button>
-      </div>
+        {/* Add Item Form */}
+        <div className="my-4">
+          <h2>Add Item</h2>
+          <input type="text" placeholder="Name" onChange={(e) => setName(e.target.value)} />
+          <input type="number" placeholder="Quantity" onChange={(e) => setQuantity(e.target.value)} />
+          <input type="text" placeholder="Unit" onChange={(e) => setUnit(e.target.value)} />
+          <input type="date" onChange={(e) => setExpiration(e.target.value)} />
+          <button onClick={addItem}>Add</button>
+        </div>
 
-      <div className="my-4 w-1/2">
-        <h2 className="text-lg font-semibold">Current Items</h2>
-        <ul className="border p-3 rounded w-full">
-          {items.length > 0 ? items.map((item, index) => (
-            <li key={index} className="py-1 border-b">{item.name} - {item.quantity} {item.unit}</li>
-          )) : <p className="text-gray-500">No items in the refrigerator.</p>}
-        </ul>
-      </div>
+        {/* Consume Item Form */}
+        <div className="my-4">
+          <h2>Consume Item</h2>
+          <input type="text" placeholder="Name" onChange={(e) => setConsumeName(e.target.value)} />
+          <input type="number" placeholder="Quantity" onChange={(e) => setConsumeQuantity(e.target.value)} />
+          <button onClick={consumeItem}>Consume</button>
+        </div>
 
-      <div className="my-4 w-1/2">
-        <h2 className="text-lg font-semibold">Expired Items</h2>
-        <ul className="border p-3 rounded w-full">
-          {expiredItems.length > 0 ? expiredItems.map((item, index) => (
-            <li key={index} className="py-1 border-b">{item.name} expired on {item.expired_on}</li>
-          )) : <p className="text-gray-500">No expired items.</p>}
-        </ul>
+        {/* Current Items List */}
+        <div className="my-4">
+          <h2>Current Items</h2>
+          <ul>
+            {items.length > 0 ? (
+              items.map((item, index) => (
+                <li key={index}>{item.name} - {item.quantity} {item.unit}</li>
+              ))
+            ) : (
+              <p>No items in the refrigerator.</p>
+            )}
+          </ul>
+        </div>
+
+        {/* Expired Items List */}
+        <div className="my-4">
+          <h2>Expired Items</h2>
+          <ul>
+            {expiredItems.length > 0 ? (
+              expiredItems.map((item, index) => (
+                <li key={index}>{item.name} expired on {item.expired_on}</li>
+              ))
+            ) : (
+              <p>No expired items.</p>
+            )}
+          </ul>
+        </div>
       </div>
     </div>
   );

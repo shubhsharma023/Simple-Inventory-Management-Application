@@ -1,9 +1,15 @@
 #root {
-  max-width: 1280px;
-  margin: 0 auto;
+  max-width: 600px; /* Reduce width for better centering */
+  margin: auto;
   padding: 2rem;
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
 }
+
 
 .logo {
   height: 6em;
