@@ -3,6 +3,7 @@
 - Go to directory folder and enter these command in terminal
   
   ` npm install > npm run dev `
+  
   `
     pip -r install requirements.txt > python3 || python3 refrigirator.py
   `
